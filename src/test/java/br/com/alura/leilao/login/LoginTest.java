@@ -59,4 +59,11 @@ public class LoginTest {
 		
 	}
 	
+	@Test
+	public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
+		this.browser.get("http://localhost:8080/leiloes/2");
+		Assert.assertTrue(browser.getCurrentUrl().equals("http://localhost:8080/login"));
+		Assert.assertFalse(browser.getPageSource().contains("Dados do Leilão"));
+	}
+	
 }
