@@ -30,7 +30,6 @@ public class LoginTest {
 	
 	@AfterEach
 	public void afterEach() {
-		this.browser.manage().window().maximize();
 		this.browser.quit();
 	}
 	
