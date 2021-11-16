@@ -15,6 +15,16 @@ import br.com.alura.leilao.login.LoginPage;
 public class LeiloesTest {
 
 	private LeiloesPage paginaDeLeiloes;
+	private CadastroLeilaoPage paginaDeCadastro;
+	
+	@BeforeEach
+	public void beforeEach() {
+		LoginPage paginaDeLogin = new LoginPage();
+		paginaDeLogin.preencheFormularioDeLogin("fulano", "pass");
+		this.paginaDeLeiloes = paginaDeLogin.efetuaLogin();
+		paginaDeLeiloes.carregarFormulario();
+		this.paginaDeCadastro = paginaDeLeiloes.carregarFormulario();
+	}
 	
 	@AfterEach
 	public void afterEach() {
@@ -24,13 +34,6 @@ public class LeiloesTest {
 	
 	@Test
 	public void deveriaCadastrarLeilao() {
-	
-		LoginPage paginaDeLogin = new LoginPage();
-		paginaDeLogin.preencheFormularioDeLogin("fulano", "pass");
-		this.paginaDeLeiloes = paginaDeLogin.efetuaLogin();
-		paginaDeLeiloes.carregarFormulario();
-		
-		CadastroLeilaoPage paginaDeCadastro = paginaDeLeiloes.carregarFormulario();
 		
 		String hoje = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		
@@ -40,10 +43,18 @@ public class LeiloesTest {
 		
 		this.paginaDeLeiloes = paginaDeCadastro.cadastrarLeilao(nome, valor, hoje);
 		
-		Assert.assertTrue(paginaDeLeiloes.isLeilaoCadastrado(nome, valor, hoje));
+		Assert.assertTrue(paginaDeLeiloes.isLeilaoCadastrado(nome, valor, hoje));			
+	}
+
+	@Test
+	public void deveriaValidarCadastrodeLeilao() {
+		
+		this.paginaDeLeiloes = paginaDeCadastro.cadastrarLeilao("", "", "");
+		Assert.assertFalse(this.paginaDeCadastro.isPaginaAtual());
+		Assert.assertTrue(this.paginaDeLeiloes.isPaginaAtual());
+		Assert.assertTrue(this.paginaDeCadastro.isMensagensDeValidacaoVisiveis());
 		
 		
 	}
-
 	
 }
