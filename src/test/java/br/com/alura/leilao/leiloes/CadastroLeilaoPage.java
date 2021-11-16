@@ -6,21 +6,20 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.login.LoginPage;
 
-public class CadastroLeilaoPage {
+public class CadastroLeilaoPage extends PageObject {
 	
 	private static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
 
-	private WebDriver browser;
+	
 		
 	public CadastroLeilaoPage(WebDriver browser) {
-		this.browser = browser;
+		super(browser);
 	}
 	
-	public void fechar() {
-		this.browser.quit();
-	}
+	
 
 	public LeiloesPage cadastrarLeilao(String nome, String valorInicial, String dataAbertura) {
 		this.browser.findElement(By.id("nome")).sendKeys(nome);

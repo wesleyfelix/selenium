@@ -6,22 +6,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.login.LoginPage;
 
-public class LeiloesPage {
+public class LeiloesPage extends PageObject{
 
 	private static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
 	private static final String URL_LEILOES = "http://localhost:8080/leiloes";
 	
-	private WebDriver browser;
+	
 	
 	public LeiloesPage(WebDriver browser) {
-		this.browser = browser;
+		super(browser);
 	}
 	
-	public void fechar() {
-		this.browser.quit();
-	}
 
 	public CadastroLeilaoPage carregarFormulario() {
 		this.browser.get(URL_CADASTRO_LEILAO);

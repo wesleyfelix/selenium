@@ -45,7 +45,7 @@ public class LoginTest {
 	
 	@Test
 	public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
-		paginaDeLogin.navegaParaPaginaDeLances();;
+		paginaDeLogin.navegaParaPaginaDeLances();
 		Assert.assertTrue(paginaDeLogin.isPaginaDeLogin());
 		Assert.assertFalse(paginaDeLogin.contemTexto("Dados do Leilão"));
 	}
